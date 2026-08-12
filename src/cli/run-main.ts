@@ -1507,6 +1507,7 @@ async function runCliWithPreparedOutputMode(
       ]);
       const commit = resolveCommitHash({ moduleUrl: import.meta.url });
       console.log(commit ? `OpenClaw ${VERSION} (${commit})` : `OpenClaw ${VERSION}`);
+      requestExitAfterOneShotOutput();
       return;
     }
 
