@@ -4368,6 +4368,10 @@ describe("runCli exit behavior", () => {
 
     expect(requestExitAfterOneShotOutputMock).toHaveBeenCalledOnce();
     expect(flushExitAfterOneShotOutputMock).not.toHaveBeenCalled();
+    // The root --version path must never construct startup progress; a reorder
+    // that moves the version check below createCliProgress would recreate the
+    // spinner leak while still passing the deferred-exit assertion above.
+    expect(createCliProgressMock).not.toHaveBeenCalled();
   });
 
   it("loads the real primary command before rendering command help", async () => {
